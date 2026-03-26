@@ -5,7 +5,9 @@
 'use strict';
 
 // ── Constantes ──
-const WHATSAPP_NUMBER = '5511999999999'; // ⚠️ Substitua pelo número real
+// ⚠️ SUBSTITUA pelo número real com DDI+DDD+número (apenas dígitos)
+// Exemplo São Paulo: '5511987654321'
+const WHATSAPP_NUMBER = '55XXXXXXXXXXX';
 const WHATSAPP_MSG = encodeURIComponent('Olá, vim pelo site e gostaria de solicitar um orçamento de terraplanagem.');
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
@@ -35,8 +37,16 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
   if (!toggleBtn || !mobileMenu) return;
 
-  const open  = () => { mobileMenu.classList.add('open');    document.body.style.overflow = 'hidden'; };
-  const close = () => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; };
+  const open  = () => {
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  };
+  const close = () => {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  };
 
   toggleBtn.addEventListener('click', open);
   closeBtn?.addEventListener('click', close);
@@ -117,13 +127,31 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 })();
 
 /* ──────────────────────────────────────────
-   6. WhatsApp — injetar URL nos botões
+   6. WhatsApp — injetar URL + tracking GA4
 ────────────────────────────────────────── */
 (function initWhatsApp() {
   document.querySelectorAll('[data-whatsapp]').forEach(el => {
     el.setAttribute('href', WHATSAPP_URL);
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener noreferrer');
+
+    el.addEventListener('click', () => {
+      // GTM dataLayer push
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          event_category: 'engagement',
+          event_label: el.dataset.source || document.title,
+        });
+      }
+      // GA4 gtag direto (caso use GA4 sem GTM)
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_whatsapp', {
+          event_category: 'engagement',
+          event_label: el.dataset.source || 'whatsapp_button',
+        });
+      }
+    });
   });
 })();
 
@@ -171,18 +199,22 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
       `📝 Mensagem: ${message || 'Gostaria de solicitar um orçamento.'}`
     );
 
-    // Abre WhatsApp
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank', 'noopener');
+    // Abre WhatsApp — window.open pode ser bloqueado por popup blockers
+    const waWindow = window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank', 'noopener');
 
-    // Mostra feedback de sucesso
-    form.style.opacity = '0';
-    form.style.transition = 'opacity 0.4s ease';
-    setTimeout(() => {
-      form.style.display = 'none';
-      if (success) {
-        success.classList.add('show');
-      }
-    }, 400);
+    // Só mostra confirmação se o popup abriu OU como fallback informativo
+    if (waWindow !== null) {
+      // Popup abriu com sucesso
+      form.style.opacity = '0';
+      form.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => {
+        form.style.display = 'none';
+        if (success) success.classList.add('show');
+      }, 400);
+    } else {
+      // Popup bloqueado — redireciona na própria aba como fallback
+      window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+    }
   });
 
   function showFieldError(form) {

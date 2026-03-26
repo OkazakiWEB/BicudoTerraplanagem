@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Bloquear arquivos desnecessários para crawlers
+Disallow: /DEPLOY.md
+
+Sitemap: https://bicudoterraplanagem.com.br/sitemap.xml
