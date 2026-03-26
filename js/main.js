@@ -270,139 +270,244 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 })();
 
 /* ──────────────────────────────────────────
-   11. Seção "Obras em Andamento" — Player de vídeos
+   11. Carrossel "Obras em Andamento"
 ────────────────────────────────────────── */
 (function initObrasPlayer() {
-  const cards = document.querySelectorAll('.video-card');
-  if (!cards.length) return;
 
-  // Referência global do vídeo em reprodução
-  let currentPlaying = null;
+  /* ═══════════════════════════════════════
+     A. CARROSSEL
+  ═══════════════════════════════════════ */
+  const track    = document.getElementById('obras-track');
+  const viewport = document.getElementById('obras-viewport');
+  const btnPrev  = document.getElementById('obras-prev');
+  const btnNext  = document.getElementById('obras-next');
+  const dotsWrap = document.getElementById('obras-dots');
+  const counter  = document.getElementById('obras-counter');
+  const progress = document.getElementById('obras-progress');
 
-  /* — Pausar todos os outros vídeos — */
-  const pauseAll = (exceptCard) => {
-    cards.forEach(card => {
-      if (card === exceptCard) return;
-      const v = card.querySelector('video');
-      if (v && !v.paused) {
-        v.pause();
-        v.currentTime = 0;
-        resetCardUI(card);
-      }
-    });
+  if (!track || !viewport) return;
+
+  const cards    = track.querySelectorAll('.obra-card');
+  const total    = cards.length;
+  if (!total) return;
+
+  const GAP      = 20; // px — deve ser igual ao gap do CSS
+  let   index    = 0;  // card atual (leftmost visível)
+  let   visible  = 3;  // cards visíveis simultaneamente
+
+  /* — Quantos cards cabem por breakpoint — */
+  const getVisible = () => {
+    const w = window.innerWidth;
+    if (w <= 640)  return 1;
+    if (w <= 1024) return 2;
+    return 3;
   };
 
-  /* — Resetar UI do card para estado inicial — */
-  const resetCardUI = (card) => {
-    card.classList.remove('is-playing');
-    const overlay = card.querySelector('.video-overlay');
-    const playBtn = card.querySelector('.play-btn');
-    if (overlay) overlay.classList.remove('hidden');
-    if (playBtn)  playBtn.classList.remove('hidden');
-    // Remove controls nativos
-    const v = card.querySelector('video');
-    if (v) v.removeAttribute('controls');
+  /* — Largura de um card em px — */
+  const cardWidth = () => cards[0]?.offsetWidth || 0;
+
+  /* — Máximo índice navegável — */
+  const maxIndex = () => Math.max(0, total - visible);
+
+  /* — Aplica transform no track — */
+  const applyTranslate = (animated = true) => {
+    if (!animated) track.classList.add('no-transition');
+    const offset = index * (cardWidth() + GAP);
+    track.style.transform = `translateX(-${offset}px)`;
+    if (!animated) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => track.classList.remove('no-transition'));
+      });
+    }
   };
 
-  /* — Iniciar reprodução de um card — */
-  const playCard = (card) => {
-    const v       = card.querySelector('video');
-    const overlay = card.querySelector('.video-overlay');
-    const playBtn = card.querySelector('.play-btn');
-    if (!v) return;
+  /* — Atualiza dots, counter, barra e botões — */
+  const updateUI = () => {
+    // Dots
+    const dotEls = dotsWrap?.querySelectorAll('.c-dot') || [];
+    dotEls.forEach((d, i) => d.classList.toggle('active', i === index));
 
-    pauseAll(card);
-    currentPlaying = card;
+    // Contador
+    if (counter) counter.textContent = `${index + 1} / ${total}`;
 
-    // Mostra controles nativos, esconde overlay e play btn
-    v.setAttribute('controls', '');
-    overlay?.classList.add('hidden');
-    playBtn?.classList.add('hidden');
-    card.classList.add('is-playing');
+    // Barra de progresso
+    if (progress) {
+      const pct = total > 1 ? (index / (total - 1)) * 100 : 100;
+      progress.style.width = `${pct}%`;
+    }
 
-    v.play().catch(() => {
-      // Autoplay bloqueado pelo browser — desfaz UI
-      resetCardUI(card);
-    });
+    // Botões de seta
+    if (btnPrev) btnPrev.disabled = index === 0;
+    if (btnNext) btnNext.disabled = index >= maxIndex();
   };
 
-  /* — Bind de clique em cada card — */
-  cards.forEach(card => {
-    const playBtn = card.querySelector('.play-btn');
-    const video   = card.querySelector('video');
+  /* — Navega para o índice N — */
+  const goTo = (n, animated = true) => {
+    index = Math.max(0, Math.min(n, maxIndex()));
+    applyTranslate(animated);
+    updateUI();
+  };
 
-    // Clique no botão play
-    playBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      playCard(card);
-    });
+  /* — Cria dots dinamicamente — */
+  const buildDots = () => {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'c-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Vídeo ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+  };
 
-    // Clique no overlay também inicia
-    const overlay = card.querySelector('.video-overlay');
-    overlay?.addEventListener('click', () => playCard(card));
+  /* — Inicializa — */
+  const init = () => {
+    visible = getVisible();
+    buildDots();
+    applyTranslate(false);
+    updateUI();
+  };
 
-    // Quando o vídeo terminar, volta para o estado inicial
-    video?.addEventListener('ended', () => {
-      resetCardUI(card);
-      currentPlaying = null;
-    });
-
-    // Clique fora do vídeo (no caption) não faz nada, mas
-    // se clicar no vídeo nativo em reprodução, deixa o browser gerenciar
-    video?.addEventListener('click', (e) => {
-      if (!card.classList.contains('is-playing')) {
-        e.preventDefault();
-        playCard(card);
-      }
-    });
+  /* — Recalcula ao redimensionar — */
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      visible = getVisible();
+      index   = Math.min(index, maxIndex());
+      applyTranslate(false);
+      updateUI();
+    }, 150);
   });
 
-  /* — Pausar vídeo quando sai da viewport (performance) — */
+  /* — Botões de seta — */
+  btnPrev?.addEventListener('click', () => goTo(index - 1));
+  btnNext?.addEventListener('click', () => goTo(index + 1));
+
+  /* — Arrastar com mouse (drag) — */
+  let isDragging = false, dragStartX = 0, dragStartIndex = 0;
+
+  viewport.addEventListener('mousedown', (e) => {
+    isDragging   = true;
+    dragStartX   = e.clientX;
+    dragStartIndex = index;
+    viewport.classList.add('is-dragging');
+    track.classList.add('no-transition');
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const diff   = dragStartX - e.clientX;
+    const offset = (dragStartIndex * (cardWidth() + GAP)) + diff;
+    track.style.transform = `translateX(-${Math.max(0, offset)}px)`;
+  });
+
+  window.addEventListener('mouseup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    viewport.classList.remove('is-dragging');
+    track.classList.remove('no-transition');
+
+    const diff      = dragStartX - e.clientX;
+    const threshold = cardWidth() * 0.25;
+
+    if (diff > threshold)       goTo(dragStartIndex + 1);
+    else if (diff < -threshold) goTo(dragStartIndex - 1);
+    else                        goTo(dragStartIndex);
+  });
+
+  /* — Touch (mobile swipe) — */
+  let touchStartX = 0, touchStartIndex = 0;
+
+  viewport.addEventListener('touchstart', (e) => {
+    touchStartX     = e.touches[0].clientX;
+    touchStartIndex = index;
+    track.classList.add('no-transition');
+  }, { passive: true });
+
+  viewport.addEventListener('touchmove', (e) => {
+    const diff   = touchStartX - e.touches[0].clientX;
+    const offset = (touchStartIndex * (cardWidth() + GAP)) + diff;
+    track.style.transform = `translateX(-${Math.max(0, offset)}px)`;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', (e) => {
+    track.classList.remove('no-transition');
+    const diff      = touchStartX - e.changedTouches[0].clientX;
+    const threshold = cardWidth() * 0.2;
+
+    if (diff > threshold)       goTo(touchStartIndex + 1);
+    else if (diff < -threshold) goTo(touchStartIndex - 1);
+    else                        goTo(touchStartIndex);
+  });
+
+  /* — Inicializa após fontes/layout prontos — */
+  if (document.readyState === 'complete') {
+    init();
+  } else {
+    window.addEventListener('load', init);
+  }
+
+  /* ═══════════════════════════════════════
+     B. PLAYER DE VÍDEO por card
+  ═══════════════════════════════════════ */
+  let currentPlaying = null;
+
+  const resetCardUI = (card) => {
+    card.classList.remove('is-playing');
+    const overlay = card.querySelector('.obra-overlay');
+    const playBtn = card.querySelector('.obra-play-btn');
+    const video   = card.querySelector('video');
+    if (overlay) overlay.style.opacity = '1';
+    if (playBtn) playBtn.classList.remove('is-hidden');
+    if (video)   video.removeAttribute('controls');
+  };
+
+  const playCard = (card) => {
+    const video   = card.querySelector('video');
+    const overlay = card.querySelector('.obra-overlay');
+    const playBtn = card.querySelector('.obra-play-btn');
+    if (!video) return;
+
+    // Para o card anterior
+    if (currentPlaying && currentPlaying !== card) {
+      const prevVideo = currentPlaying.querySelector('video');
+      if (prevVideo && !prevVideo.paused) prevVideo.pause();
+      resetCardUI(currentPlaying);
+    }
+    currentPlaying = card;
+
+    video.setAttribute('controls', '');
+    if (overlay) overlay.style.opacity = '0';
+    if (playBtn) playBtn.classList.add('is-hidden');
+    card.classList.add('is-playing');
+
+    video.play().catch(() => resetCardUI(card));
+  };
+
+  cards.forEach(card => {
+    const playBtn = card.querySelector('.obra-play-btn');
+    const overlay = card.querySelector('.obra-overlay');
+    const video   = card.querySelector('video');
+
+    playBtn?.addEventListener('click', (e) => { e.stopPropagation(); playCard(card); });
+    overlay?.addEventListener('click', () => playCard(card));
+    video?.addEventListener('ended', () => { resetCardUI(card); currentPlaying = null; });
+  });
+
+  /* — Pausa ao sair da viewport — */
   if ('IntersectionObserver' in window) {
-    const visibilityObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) {
-            const v = entry.target.querySelector('video');
-            if (v && !v.paused) {
-              v.pause();
-              resetCardUI(entry.target);
-            }
-          }
-        });
-      },
-      { threshold: 0.25 }
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          const v = entry.target.querySelector('video');
+          if (v && !v.paused) { v.pause(); resetCardUI(entry.target); }
+        }
+      }),
+      { threshold: 0.2 }
     );
-
-    cards.forEach(card => visibilityObserver.observe(card));
+    cards.forEach(c => obs.observe(c));
   }
 
-  /* — Carrossel mobile: dots de navegação — */
-  const grid = document.getElementById('obras-grid');
-  const dots = document.querySelectorAll('#obras-dots .carousel-dot');
-
-  if (grid && dots.length) {
-    // Atualiza dot ativo ao rolar o carrossel
-    const updateDots = () => {
-      const scrollLeft   = grid.scrollLeft;
-      const cardWidth    = grid.querySelector('.video-card')?.offsetWidth || 0;
-      const gap          = 16;
-      const activeIndex  = Math.round(scrollLeft / (cardWidth + gap));
-
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === activeIndex);
-      });
-    };
-
-    grid.addEventListener('scroll', updateDots, { passive: true });
-
-    // Clique nos dots faz scroll suave até o card correspondente
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        const cardWidth = grid.querySelector('.video-card')?.offsetWidth || 0;
-        const gap       = 16;
-        grid.scrollTo({ left: i * (cardWidth + gap), behavior: 'smooth' });
-      });
-    });
-  }
 })();
