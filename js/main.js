@@ -268,3 +268,141 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
   images.forEach(img => observer.observe(img));
 })();
+
+/* ──────────────────────────────────────────
+   11. Seção "Obras em Andamento" — Player de vídeos
+────────────────────────────────────────── */
+(function initObrasPlayer() {
+  const cards = document.querySelectorAll('.video-card');
+  if (!cards.length) return;
+
+  // Referência global do vídeo em reprodução
+  let currentPlaying = null;
+
+  /* — Pausar todos os outros vídeos — */
+  const pauseAll = (exceptCard) => {
+    cards.forEach(card => {
+      if (card === exceptCard) return;
+      const v = card.querySelector('video');
+      if (v && !v.paused) {
+        v.pause();
+        v.currentTime = 0;
+        resetCardUI(card);
+      }
+    });
+  };
+
+  /* — Resetar UI do card para estado inicial — */
+  const resetCardUI = (card) => {
+    card.classList.remove('is-playing');
+    const overlay = card.querySelector('.video-overlay');
+    const playBtn = card.querySelector('.play-btn');
+    if (overlay) overlay.classList.remove('hidden');
+    if (playBtn)  playBtn.classList.remove('hidden');
+    // Remove controls nativos
+    const v = card.querySelector('video');
+    if (v) v.removeAttribute('controls');
+  };
+
+  /* — Iniciar reprodução de um card — */
+  const playCard = (card) => {
+    const v       = card.querySelector('video');
+    const overlay = card.querySelector('.video-overlay');
+    const playBtn = card.querySelector('.play-btn');
+    if (!v) return;
+
+    pauseAll(card);
+    currentPlaying = card;
+
+    // Mostra controles nativos, esconde overlay e play btn
+    v.setAttribute('controls', '');
+    overlay?.classList.add('hidden');
+    playBtn?.classList.add('hidden');
+    card.classList.add('is-playing');
+
+    v.play().catch(() => {
+      // Autoplay bloqueado pelo browser — desfaz UI
+      resetCardUI(card);
+    });
+  };
+
+  /* — Bind de clique em cada card — */
+  cards.forEach(card => {
+    const playBtn = card.querySelector('.play-btn');
+    const video   = card.querySelector('video');
+
+    // Clique no botão play
+    playBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playCard(card);
+    });
+
+    // Clique no overlay também inicia
+    const overlay = card.querySelector('.video-overlay');
+    overlay?.addEventListener('click', () => playCard(card));
+
+    // Quando o vídeo terminar, volta para o estado inicial
+    video?.addEventListener('ended', () => {
+      resetCardUI(card);
+      currentPlaying = null;
+    });
+
+    // Clique fora do vídeo (no caption) não faz nada, mas
+    // se clicar no vídeo nativo em reprodução, deixa o browser gerenciar
+    video?.addEventListener('click', (e) => {
+      if (!card.classList.contains('is-playing')) {
+        e.preventDefault();
+        playCard(card);
+      }
+    });
+  });
+
+  /* — Pausar vídeo quando sai da viewport (performance) — */
+  if ('IntersectionObserver' in window) {
+    const visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            const v = entry.target.querySelector('video');
+            if (v && !v.paused) {
+              v.pause();
+              resetCardUI(entry.target);
+            }
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    cards.forEach(card => visibilityObserver.observe(card));
+  }
+
+  /* — Carrossel mobile: dots de navegação — */
+  const grid = document.getElementById('obras-grid');
+  const dots = document.querySelectorAll('#obras-dots .carousel-dot');
+
+  if (grid && dots.length) {
+    // Atualiza dot ativo ao rolar o carrossel
+    const updateDots = () => {
+      const scrollLeft   = grid.scrollLeft;
+      const cardWidth    = grid.querySelector('.video-card')?.offsetWidth || 0;
+      const gap          = 16;
+      const activeIndex  = Math.round(scrollLeft / (cardWidth + gap));
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIndex);
+      });
+    };
+
+    grid.addEventListener('scroll', updateDots, { passive: true });
+
+    // Clique nos dots faz scroll suave até o card correspondente
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        const cardWidth = grid.querySelector('.video-card')?.offsetWidth || 0;
+        const gap       = 16;
+        grid.scrollTo({ left: i * (cardWidth + gap), behavior: 'smooth' });
+      });
+    });
+  }
+})();
