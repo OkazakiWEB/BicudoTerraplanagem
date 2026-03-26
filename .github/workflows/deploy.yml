@@ -1,0 +1,32 @@
+name: Deploy para Vercel
+
+on:
+  push:
+    branches:
+      - main   # Dispara em todo push para main
+
+jobs:
+  deploy:
+    name: Deploy Production
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Baixa o código do repositório
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      # 2. Instala o Vercel CLI
+      - name: Instalar Vercel CLI
+        run: npm install --global vercel@latest
+
+      # 3. Faz o pull das configurações do projeto na Vercel
+      - name: Sincronizar configurações Vercel
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      # 4. Faz o build
+      - name: Build do projeto
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      # 5. Deploy para produção
+      - name: Deploy para produção
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
