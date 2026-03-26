@@ -1,0 +1,16 @@
+{
+  "name": "bicudoterraplanagem",
+  "version": "1.0.0",
+  "description": "Landing page Bicudo Terraplanagem",
+  "scripts": {
+    "build:css": "tailwindcss -i css/tailwind-input.css -o css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i css/tailwind-input.css -o css/tailwind.css --watch"
+  },
+  "keywords": [],
+  "author": "Bicudo Terraplanagem",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}

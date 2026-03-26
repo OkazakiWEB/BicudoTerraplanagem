@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* Especifica quais arquivos escanear para purge */
+@source "../index.html";
+@source "../js/*.js";
+
+/* Cores customizadas — equivale ao tailwind.config.theme.extend.colors */
+@theme {
+  --color-brand-yellow: #F2B705;
+  --color-brand-yellow-dark: #D9A004;
+  --color-brand-black: #1A1A1A;
+  --color-brand-gray: #404040;
+}

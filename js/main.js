@@ -7,7 +7,7 @@
 // ── Constantes ──
 // ⚠️ SUBSTITUA pelo número real com DDI+DDD+número (apenas dígitos)
 // Exemplo São Paulo: '5511987654321'
-const WHATSAPP_NUMBER = '55XXXXXXXXXXX';
+const WHATSAPP_NUMBER = '1194755-0307';
 const WHATSAPP_MSG = encodeURIComponent('Olá, vim pelo site e gostaria de solicitar um orçamento de terraplanagem.');
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
@@ -30,14 +30,14 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
    2. Mobile menu
 ────────────────────────────────────────── */
 (function initMobileMenu() {
-  const toggleBtn  = document.getElementById('menu-toggle');
-  const closeBtn   = document.getElementById('menu-close');
+  const toggleBtn = document.getElementById('menu-toggle');
+  const closeBtn = document.getElementById('menu-close');
   const mobileMenu = document.getElementById('mobile-menu');
-  const menuLinks  = mobileMenu?.querySelectorAll('a');
+  const menuLinks = mobileMenu?.querySelectorAll('a');
 
   if (!toggleBtn || !mobileMenu) return;
 
-  const open  = () => {
+  const open = () => {
     mobileMenu.classList.add('open');
     document.body.style.overflow = 'hidden';
     toggleBtn.setAttribute('aria-expanded', 'true');
@@ -92,17 +92,17 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
   if (!counters.length) return;
 
   const animateCounter = (el) => {
-    const target   = parseInt(el.dataset.count, 10);
-    const suffix   = el.dataset.suffix || '';
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
     const duration = 1800;
-    const start    = performance.now();
+    const start = performance.now();
 
     const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
     const update = (now) => {
-      const elapsed  = now - start;
+      const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      const value    = Math.floor(easeOut(progress) * target);
+      const value = Math.floor(easeOut(progress) * target);
       el.textContent = value + suffix;
       if (progress < 1) requestAnimationFrame(update);
       else el.textContent = target + suffix;
@@ -159,7 +159,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
    7. Formulário — validação + envio
 ────────────────────────────────────────── */
 (function initForm() {
-  const form    = document.getElementById('contact-form');
+  const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
   if (!form) return;
 
@@ -181,8 +181,8 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name    = form.querySelector('#name')?.value.trim();
-    const phone   = form.querySelector('#phone')?.value.trim();
+    const name = form.querySelector('#name')?.value.trim();
+    const phone = form.querySelector('#phone')?.value.trim();
     const service = form.querySelector('#service')?.value;
     const message = form.querySelector('#message')?.value.trim();
 
@@ -241,7 +241,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
       e.preventDefault();
 
       const offset = 80; // altura do header fixo
-      const top    = target.getBoundingClientRect().top + window.scrollY - offset;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
 
       window.scrollTo({ top, behavior: 'smooth' });
     });
@@ -309,28 +309,28 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
   /* ═══════════════════════════════════════
      A. CARROSSEL
   ═══════════════════════════════════════ */
-  const track    = document.getElementById('obras-track');
+  const track = document.getElementById('obras-track');
   const viewport = document.getElementById('obras-viewport');
-  const btnPrev  = document.getElementById('obras-prev');
-  const btnNext  = document.getElementById('obras-next');
+  const btnPrev = document.getElementById('obras-prev');
+  const btnNext = document.getElementById('obras-next');
   const dotsWrap = document.getElementById('obras-dots');
-  const counter  = document.getElementById('obras-counter');
+  const counter = document.getElementById('obras-counter');
   const progress = document.getElementById('obras-progress');
 
   if (!track || !viewport) return;
 
-  const cards    = track.querySelectorAll('.obra-card');
-  const total    = cards.length;
+  const cards = track.querySelectorAll('.obra-card');
+  const total = cards.length;
   if (!total) return;
 
-  const GAP      = 20; // px — deve ser igual ao gap do CSS
-  let   index    = 0;  // card atual (leftmost visível)
-  let   visible  = 3;  // cards visíveis simultaneamente
+  const GAP = 20; // px — deve ser igual ao gap do CSS
+  let index = 0;  // card atual (leftmost visível)
+  let visible = 3;  // cards visíveis simultaneamente
 
   /* — Quantos cards cabem por breakpoint — */
   const getVisible = () => {
     const w = window.innerWidth;
-    if (w <= 640)  return 1;
+    if (w <= 640) return 1;
     if (w <= 1024) return 2;
     return 3;
   };
@@ -407,7 +407,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       visible = getVisible();
-      index   = Math.min(index, maxIndex());
+      index = Math.min(index, maxIndex());
       applyTranslate(false);
       updateUI();
     }, 150);
@@ -421,8 +421,8 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
   let isDragging = false, dragStartX = 0, dragStartIndex = 0;
 
   viewport.addEventListener('mousedown', (e) => {
-    isDragging   = true;
-    dragStartX   = e.clientX;
+    isDragging = true;
+    dragStartX = e.clientX;
     dragStartIndex = index;
     viewport.classList.add('is-dragging');
     track.classList.add('no-transition');
@@ -430,7 +430,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
   window.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    const diff   = dragStartX - e.clientX;
+    const diff = dragStartX - e.clientX;
     const offset = (dragStartIndex * (cardWidth() + GAP)) + diff;
     track.style.transform = `translateX(-${Math.max(0, offset)}px)`;
   });
@@ -441,37 +441,37 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
     viewport.classList.remove('is-dragging');
     track.classList.remove('no-transition');
 
-    const diff      = dragStartX - e.clientX;
+    const diff = dragStartX - e.clientX;
     const threshold = cardWidth() * 0.25;
 
-    if (diff > threshold)       goTo(dragStartIndex + 1);
+    if (diff > threshold) goTo(dragStartIndex + 1);
     else if (diff < -threshold) goTo(dragStartIndex - 1);
-    else                        goTo(dragStartIndex);
+    else goTo(dragStartIndex);
   });
 
   /* — Touch (mobile swipe) — */
   let touchStartX = 0, touchStartIndex = 0;
 
   viewport.addEventListener('touchstart', (e) => {
-    touchStartX     = e.touches[0].clientX;
+    touchStartX = e.touches[0].clientX;
     touchStartIndex = index;
     track.classList.add('no-transition');
   }, { passive: true });
 
   viewport.addEventListener('touchmove', (e) => {
-    const diff   = touchStartX - e.touches[0].clientX;
+    const diff = touchStartX - e.touches[0].clientX;
     const offset = (touchStartIndex * (cardWidth() + GAP)) + diff;
     track.style.transform = `translateX(-${Math.max(0, offset)}px)`;
   }, { passive: true });
 
   viewport.addEventListener('touchend', (e) => {
     track.classList.remove('no-transition');
-    const diff      = touchStartX - e.changedTouches[0].clientX;
+    const diff = touchStartX - e.changedTouches[0].clientX;
     const threshold = cardWidth() * 0.2;
 
-    if (diff > threshold)       goTo(touchStartIndex + 1);
+    if (diff > threshold) goTo(touchStartIndex + 1);
     else if (diff < -threshold) goTo(touchStartIndex - 1);
-    else                        goTo(touchStartIndex);
+    else goTo(touchStartIndex);
   });
 
   /* — Inicializa após fontes/layout prontos — */
@@ -490,14 +490,14 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
     card.classList.remove('is-playing');
     const overlay = card.querySelector('.obra-overlay');
     const playBtn = card.querySelector('.obra-play-btn');
-    const video   = card.querySelector('video');
+    const video = card.querySelector('video');
     if (overlay) overlay.style.opacity = '1';
     if (playBtn) playBtn.classList.remove('is-hidden');
-    if (video)   video.removeAttribute('controls');
+    if (video) video.removeAttribute('controls');
   };
 
   const playCard = (card) => {
-    const video   = card.querySelector('video');
+    const video = card.querySelector('video');
     const overlay = card.querySelector('.obra-overlay');
     const playBtn = card.querySelector('.obra-play-btn');
     if (!video) return;
@@ -521,7 +521,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
   cards.forEach(card => {
     const playBtn = card.querySelector('.obra-play-btn');
     const overlay = card.querySelector('.obra-overlay');
-    const video   = card.querySelector('video');
+    const video = card.querySelector('video');
 
     playBtn?.addEventListener('click', (e) => { e.stopPropagation(); playCard(card); });
     overlay?.addEventListener('click', () => playCard(card));
