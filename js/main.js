@@ -5,9 +5,9 @@
 'use strict';
 
 // ── Constantes ──
-// ⚠️ SUBSTITUA pelo número real com DDI+DDD+número (apenas dígitos)
-// Exemplo São Paulo: '5511987654321'
-const WHATSAPP_NUMBER = '1194755-0307';
+// ⚠️ SUBSTITUA pelo número real: DDI(55) + DDD + número, apenas dígitos, sem hífen
+// Exemplo: '5511987654321'
+const WHATSAPP_NUMBER = '5511947550307';
 const WHATSAPP_MSG = encodeURIComponent('Olá, vim pelo site e gostaria de solicitar um orçamento de terraplanagem.');
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
@@ -183,6 +183,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
     const name = form.querySelector('#name')?.value.trim();
     const phone = form.querySelector('#phone')?.value.trim();
+    const city = form.querySelector('#city')?.value.trim();
     const service = form.querySelector('#service')?.value;
     const message = form.querySelector('#message')?.value.trim();
 
@@ -195,6 +196,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
     const msg = encodeURIComponent(
       `Olá! Sou ${name}.\n\n` +
       `📱 Telefone: ${phone}\n` +
+      (city ? `📍 Cidade: ${city}\n` : '') +
       `🔧 Serviço: ${service}\n` +
       `📝 Mensagem: ${message || 'Gostaria de solicitar um orçamento.'}`
     );

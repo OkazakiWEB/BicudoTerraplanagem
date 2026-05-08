@@ -15,6 +15,7 @@
   <meta name="author" content="Bicudo Terraplanagem" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://bicudoterraplanagem.com.br/" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
   <!-- ── Open Graph (redes sociais) ── -->
   <meta property="og:title" content="Terraplanagem em SÃO PAULO | Bicudo Terraplanagem" />
@@ -33,9 +34,18 @@
   <meta name="twitter:title" content="Bicudo Terraplanagem" />
   <meta name="twitter:description" content="Terraplanagem profissional. Orçamento pelo WhatsApp!" />
 
+  <!-- ── Geo meta (SEO local) ── -->
+  <meta name="geo.region" content="BR-SP" />
+  <meta name="geo.placename" content="São Paulo, SP" />
+  <meta name="geo.position" content="-23.0000;-46.0000" />
+  <meta name="ICBM" content="-23.0000, -46.0000" />
+
   <!-- ── Favicon ── -->
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%23F2B705'/><text y='72' x='12' font-size='62' font-family='Arial Black' fill='%231A1A1A' font-weight='900'>B</text></svg>" />
+
+  <!-- ── Preload LCP (poster do hero) ── -->
+  <link rel="preload" as="image" href="assets/img-01.jpg" fetchpriority="high" />
 
   <!-- ── Fonts ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -61,6 +71,48 @@
             'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
   <!-- ── /Google Tag Manager ── -->
+
+  <!-- ── Schema.org FAQ (Rich Snippets) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quanto custa um serviço de terraplanagem em São Paulo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O custo varia conforme o tamanho do terreno, tipo de solo e serviço necessário. A Bicudo Terraplanagem oferece orçamento gratuito em até 24 horas pelo WhatsApp."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quais regiões de SP a Bicudo Terraplanagem atende?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Atendemos São Paulo capital, Guarulhos, Mogi das Cruzes, Santo André, Osasco, Barueri, Campinas, Vale do Paraíba e toda a Grande São Paulo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A empresa tem equipamentos próprios?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. A Bicudo Terraplanagem possui frota própria com mais de 12 equipamentos, incluindo escavadeiras hidráulicas, tratores de esteiras, rolos compactadores, caminhões basculantes e motoniveladoras."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Em quanto tempo recebo o orçamento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nosso prazo de resposta é de até 24 horas úteis. Para agilizar, entre em contato diretamente pelo WhatsApp."
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- ── Schema.org JSON-LD (SEO local) ── -->
   <!-- ⚠️ Preencha TODOS os campos marcados com SUBSTITUA antes de publicar -->
@@ -161,6 +213,7 @@
         <a href="#galeria" class="nav-link">Galeria</a>
         <a href="#obras" class="nav-link">Obras</a>
         <a href="#diferenciais" class="nav-link">Diferenciais</a>
+        <a href="#equipamentos" class="nav-link">Equipamentos</a>
         <a href="#contato" class="nav-link">Contato</a>
       </nav>
 
@@ -197,6 +250,7 @@
     <a href="#galeria" class="nav-link text-2xl font-bold">Galeria</a>
     <a href="#obras" class="nav-link text-2xl font-bold">Obras</a>
     <a href="#diferenciais" class="nav-link text-2xl font-bold">Diferenciais</a>
+    <a href="#equipamentos" class="nav-link text-2xl font-bold">Equipamentos</a>
     <a href="#contato" class="nav-link text-2xl font-bold">Contato</a>
     <a href="#" data-whatsapp class="btn-primary mt-4">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -302,28 +356,13 @@
         </div>
       </div>
     </div>
-    <style>
-      @keyframes scrollDot {
-
-        0%,
-        100% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        50% {
-          transform: translateY(12px);
-          opacity: 0.3;
-        }
-      }
-    </style>
   </section>
 
 
   <!-- ════════════════════════════════════════
        STATS — Números que impressionam
   ════════════════════════════════════════ -->
-  <section style="background:#111111; padding: 60px 0;" aria-label="Números da empresa">
+  <section id="numeros" style="background:#111111; padding: 60px 0;" aria-label="Números da empresa">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="stat-card fade-up stagger-1">
@@ -631,7 +670,7 @@
             height="1599" loading="lazy" />
         </div>
         <div class="gallery-item">
-          <img src="assets/img-03.jpg" alt="Serviço de limpeza e preparo de terreno — Bicudo Terraplanagem" width="900"
+          <img src="assets/img-05.jpg" alt="Serviço de limpeza e preparo de terreno — Bicudo Terraplanagem" width="900"
             height="1600" loading="lazy" />
         </div>
       </div>
@@ -1115,6 +1154,97 @@
 
 
   <!-- ════════════════════════════════════════
+       EQUIPAMENTOS — Nossa frota própria
+  ════════════════════════════════════════ -->
+  <section id="equipamentos" style="padding: 100px 0;" aria-labelledby="equipamentos-title">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-16 fade-up">
+        <span class="section-eyebrow">Nossa Frota</span>
+        <h2 id="equipamentos-title" class="section-title">
+          Equipamentos <span>Próprios</span>
+        </h2>
+        <div class="section-divider mx-auto"></div>
+        <p style="color:rgba(255,255,255,0.55); max-width:520px; margin:0 auto; font-size:0.95rem; line-height:1.7;">
+          Frota completa e atualizada para qualquer porte de obra — sem dependência de terceiros, com mais agilidade e menor custo.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <article class="equip-card fade-up stagger-1">
+          <div class="equip-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F2B705" stroke-width="1.6">
+              <rect x="1" y="3" width="15" height="13" /><polygon points="16,8 20,8 23,11 23,16 16,16 16,8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
+            </svg>
+          </div>
+          <h3>Escavadeira Hidráulica</h3>
+          <p>CAT 320 e modelos similares para escavação, carregamento e demolição com alta precisão e capacidade.</p>
+          <span class="equip-badge">Frota Própria</span>
+        </article>
+
+        <article class="equip-card fade-up stagger-2">
+          <div class="equip-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F2B705" stroke-width="1.6">
+              <path d="M2 22h20M2 17l4-4 4 4 4-8 4 8" />
+            </svg>
+          </div>
+          <h3>Trator de Esteiras</h3>
+          <p>Potência e tração máxima para nivelamento de terreno, empurramento de terra e abertura de acessos.</p>
+          <span class="equip-badge">Frota Própria</span>
+        </article>
+
+        <article class="equip-card fade-up stagger-3">
+          <div class="equip-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F2B705" stroke-width="1.6">
+              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" />
+            </svg>
+          </div>
+          <h3>Rolo Compactador</h3>
+          <p>Compactação vibratória para atingir os índices de CBR exigidos em projetos estruturais e estradas.</p>
+          <span class="equip-badge">Frota Própria</span>
+        </article>
+
+        <article class="equip-card fade-up stagger-4">
+          <div class="equip-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F2B705" stroke-width="1.6">
+              <rect x="1" y="6" width="14" height="10" /><polygon points="15,9 19,9 22,12 22,16 15,16 15,9" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" />
+            </svg>
+          </div>
+          <h3>Caminhão Basculante</h3>
+          <p>Transporte ágil de terra, entulho e material granular para destinação correta ou aterro controlado.</p>
+          <span class="equip-badge">Frota Própria</span>
+        </article>
+
+        <article class="equip-card fade-up stagger-5">
+          <div class="equip-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F2B705" stroke-width="1.6">
+              <path d="M3 17l18-5M3 17v-4l18-5v4M3 17h18" />
+            </svg>
+          </div>
+          <h3>Motoniveladora</h3>
+          <p>Acabamento perfeito de pistas, acessos e terraços com controle rigoroso de nível e inclinação.</p>
+          <span class="equip-badge">Frota Própria</span>
+        </article>
+
+        <article class="equip-card fade-up stagger-5"
+          style="background:rgba(242,183,5,0.06); border-color:rgba(242,183,5,0.2); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:220px;">
+          <div style="font-family:'Montserrat',sans-serif; font-size:2.8rem; font-weight:900; color:#F2B705; line-height:1;">12+</div>
+          <div style="font-size:0.88rem; color:rgba(255,255,255,0.6); margin:10px 0 22px; line-height:1.5;">Equipamentos<br>em operação</div>
+          <a href="#" data-whatsapp class="btn-primary text-sm px-5 py-3">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Ver disponibilidade
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════
        DEPOIMENTOS — Prova social
   ════════════════════════════════════════ -->
   <section style="padding: 100px 0;" aria-labelledby="depoimentos-title">
@@ -1236,6 +1366,90 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════
+       ÁREAS DE ATENDIMENTO — SEO Local
+  ════════════════════════════════════════ -->
+  <section id="areas" style="background:#111111; padding: 80px 0;" aria-labelledby="areas-title">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-12 fade-up">
+        <span class="section-eyebrow">Atendimento Regional</span>
+        <h2 id="areas-title" class="section-title">
+          Onde <span>Atuamos</span>
+        </h2>
+        <div class="section-divider mx-auto"></div>
+        <p style="color:rgba(255,255,255,0.55); max-width:520px; margin:0 auto; font-size:0.95rem; line-height:1.7;">
+          Atendemos São Paulo capital e toda a região metropolitana com mobilização rápida de equipamentos e equipe especializada.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 fade-up">
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          São Paulo
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Guarulhos
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Mogi das Cruzes
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Santo André
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Osasco
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Barueri
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Suzano
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          São Bernardo
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Campinas
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Vale do Paraíba
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Interior de SP
+        </div>
+        <div class="area-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#F2B705" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          + Região
+        </div>
+      </div>
+
+      <div class="text-center mt-10 fade-up">
+        <p style="font-size:0.88rem; color:rgba(255,255,255,0.4); margin-bottom:16px;">
+          Não encontrou sua cidade? Entre em contato — atendemos toda a Grande SP.
+        </p>
+        <a href="#" data-whatsapp class="btn-secondary inline-flex">
+          Consultar atendimento na minha região
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
     </div>
   </section>
 
@@ -1380,6 +1594,11 @@
                 </div>
 
                 <div>
+                  <label class="form-label" for="city">Cidade / Localização</label>
+                  <input id="city" name="city" type="text" class="form-field" placeholder="Ex: Guarulhos, Mogi das Cruzes..." autocomplete="address-level2" />
+                </div>
+
+                <div>
                   <label class="form-label" for="service">Serviço desejado <span style="color:#ef4444;">*</span></label>
                   <select id="service" name="service" class="form-field" required>
                     <option value="" disabled selected>Selecione o serviço</option>
@@ -1473,6 +1692,8 @@
             <li><a href="#servicos" class="footer-link">Aterro e Desaterro</a></li>
             <li><a href="#servicos" class="footer-link">Compactação de Solo</a></li>
             <li><a href="#servicos" class="footer-link">Escavação</a></li>
+            <li><a href="#equipamentos" class="footer-link">Nossa Frota</a></li>
+            <li><a href="#areas" class="footer-link">Áreas de Atendimento</a></li>
           </ul>
         </div>
 
