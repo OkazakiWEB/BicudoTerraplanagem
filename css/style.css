@@ -8,10 +8,10 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
 :root {
-  --bg:          #080808;
-  --bg-soft:     #0F0F0F;
-  --bg-mid:      #141414;
-  --surface:     #1A1A1A;
+  --bg:          #0E1B2E;
+  --bg-soft:     #122038;
+  --bg-mid:      #152540;
+  --surface:     #1C2F4A;
   --cream:       #F0EDE4;
   --cream-dim:   #C8C4BB;
   --yellow:      #F2B705;
@@ -59,7 +59,7 @@ h1, h2, h3, h4 {
 }
 
 #header.scrolled {
-  background: rgba(8,8,8,0.96);
+  background: rgba(14,27,46,0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 16px 0;
@@ -1097,7 +1097,7 @@ footer {
 #mobile-menu {
   display: none;
   position: fixed; inset: 0;
-  background: rgba(8,8,8,0.98);
+  background: rgba(14,27,46,0.99);
   backdrop-filter: blur(20px);
   z-index: 997;
   flex-direction: column;
