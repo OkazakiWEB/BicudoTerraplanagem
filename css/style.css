@@ -183,7 +183,7 @@ h1, h2, h3, h4, h5 {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.38) saturate(0.75);
+  filter: brightness(0.25) saturate(0.6);
   transform: scale(1.04);
   transition: transform 8s ease;
 }
@@ -196,89 +196,88 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(26, 26, 26, 0.85) 0%,
-    rgba(26, 26, 26, 0.5) 50%,
-    rgba(242, 183, 5, 0.08) 100%
+    180deg,
+    rgba(15, 15, 15, 0.5) 0%,
+    rgba(15, 15, 15, 0.2) 40%,
+    rgba(15, 15, 15, 0.7) 100%
   );
 }
 
 .hero-line {
-  width: 60px;
-  height: 4px;
-  background: var(--yellow);
-  border-radius: 2px;
-  margin-bottom: 20px;
+  display: none;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(242, 183, 5, 0.12);
-  border: 1px solid rgba(242, 183, 5, 0.3);
-  color: var(--yellow);
-  font-size: 0.8rem;
-  font-weight: 600;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.68rem;
+  font-weight: 700;
   font-family: 'Montserrat', sans-serif;
-  padding: 6px 16px;
-  border-radius: 100px;
-  letter-spacing: 1px;
+  padding: 0;
+  border-radius: 0;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 /* ── Stats counter ── */
 .stat-card {
   text-align: center;
-  padding: 24px 20px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
-  transition: var(--transition);
+  padding: 40px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  transition: none;
 }
 
+.stat-card:last-child { border-right: none; }
+
 .stat-card:hover {
-  background: rgba(242, 183, 5, 0.08);
-  border-color: rgba(242, 183, 5, 0.2);
-  transform: translateY(-3px);
+  background: transparent;
+  transform: none;
 }
 
 .stat-number {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.5rem;
+  font-size: clamp(2.8rem, 5vw, 4rem);
   font-weight: 900;
-  color: var(--yellow);
+  color: var(--white);
   line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.6);
-  margin-top: 6px;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 8px;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 /* ── Section titles ── */
 .section-eyebrow {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--yellow);
-  margin-bottom: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
   display: block;
 }
 
 .section-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 900;
   color: var(--white);
-  line-height: 1.15;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 
 .section-title span {
@@ -286,67 +285,51 @@ h1, h2, h3, h4, h5 {
 }
 
 .section-divider {
-  width: 50px;
-  height: 3px;
+  width: 40px;
+  height: 2px;
   background: var(--yellow);
-  border-radius: 2px;
-  margin: 20px 0;
+  border-radius: 0;
+  margin: 24px 0;
+  opacity: 0.7;
 }
 
 /* ── Serviços ── */
 .service-card {
-  background: #242424;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 36px 28px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-radius: 0;
+  padding: 32px 0;
   position: relative;
   overflow: hidden;
-  transition: var(--transition);
+  transition: border-color 0.3s ease;
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .service-card::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--yellow);
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
+  display: none;
 }
 
 .service-card:hover {
-  background: #2A2A2A;
+  background: transparent;
   border-color: rgba(242, 183, 5, 0.2);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  transform: none;
+  box-shadow: none;
 }
 
 .service-card:hover::before {
-  transform: scaleX(1);
+  transform: none;
 }
 
 .service-icon {
-  width: 58px;
-  height: 58px;
-  background: rgba(242, 183, 5, 0.1);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 22px;
-  transition: var(--transition);
-}
-
-.service-card:hover .service-icon {
-  background: rgba(242, 183, 5, 0.2);
-  transform: scale(1.08);
+  display: none;
 }
 
 .service-card h3 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--white);
   margin-bottom: 10px;
@@ -354,8 +337,8 @@ h1, h2, h3, h4, h5 {
 
 .service-card p {
   font-size: 0.88rem;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.65;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
 }
 
 /* ── Galeria ── */
@@ -770,71 +753,56 @@ h1, h2, h3, h4, h5 {
 .diff-card {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
-  padding: 28px;
-  background: #242424;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px;
-  transition: var(--transition);
+  gap: 0;
+  padding: 20px 0 20px 20px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid rgba(242,183,5,0.25);
+  border-radius: 0;
+  transition: border-color 0.3s ease;
 }
 
 .diff-card:hover {
-  border-color: rgba(242, 183, 5, 0.15);
-  transform: translateY(-3px);
+  border-left-color: var(--yellow);
+  transform: none;
 }
 
 .diff-icon {
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
-  background: rgba(242, 183, 5, 0.1);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
 /* ── CTA Section ── */
 .cta-section {
-  background: linear-gradient(135deg, #F2B705 0%, #D9A004 100%);
+  background: #0D0D0D;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 
 .cta-section::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -10%;
-  width: 500px;
-  height: 500px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 50%;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(242,183,5,0.3), transparent);
 }
 
 .cta-section::after {
-  content: '';
-  position: absolute;
-  bottom: -30%;
-  left: -5%;
-  width: 300px;
-  height: 300px;
-  background: rgba(0,0,0,0.06);
-  border-radius: 50%;
+  display: none;
 }
 
 .btn-dark {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--black);
-  color: var(--yellow);
+  background: var(--yellow);
+  color: var(--black);
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   padding: 16px 32px;
   border-radius: 4px;
-  border: 2px solid var(--black);
+  border: 2px solid var(--yellow);
   cursor: pointer;
   transition: var(--transition);
   text-decoration: none;
@@ -842,9 +810,10 @@ h1, h2, h3, h4, h5 {
 }
 
 .btn-dark:hover {
-  background: #0f0f0f;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  background: var(--yellow-dark);
+  border-color: var(--yellow-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(242,183,5,0.25);
 }
 
 /* ── Formulário ── */
@@ -1049,23 +1018,16 @@ footer {
 
 /* ── Depoimentos ── */
 .testimonial-card {
-  background: #242424;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 32px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-radius: 0;
+  padding: 36px 0;
   position: relative;
 }
 
 .testimonial-card::before {
-  content: '"';
-  position: absolute;
-  top: 16px;
-  left: 24px;
-  font-size: 5rem;
-  color: rgba(242, 183, 5, 0.15);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  line-height: 1;
+  display: none;
 }
 
 /* ── Responsivo ── */
@@ -1108,37 +1070,29 @@ footer {
 
 /* ── Equipamentos ── */
 .equip-card {
-  background: #242424;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 36px 28px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-radius: 0;
+  padding: 24px 0;
   position: relative;
-  overflow: hidden;
-  transition: var(--transition);
+  overflow: visible;
+  transition: border-color 0.3s ease;
 }
 
 .equip-card:hover {
-  background: #2A2A2A;
+  background: transparent;
   border-color: rgba(242,183,5,0.2);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  transform: none;
+  box-shadow: none;
 }
 
 .equip-icon {
-  width: 64px;
-  height: 64px;
-  background: rgba(242,183,5,0.08);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  transition: var(--transition);
+  display: none;
 }
 
 .equip-card:hover .equip-icon {
-  background: rgba(242,183,5,0.15);
-  transform: scale(1.06);
+  display: none;
 }
 
 .equip-card h3 {
@@ -1157,17 +1111,7 @@ footer {
 }
 
 .equip-badge {
-  display: inline-block;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--yellow);
-  background: rgba(242,183,5,0.1);
-  border: 1px solid rgba(242,183,5,0.2);
-  padding: 4px 10px;
-  border-radius: 4px;
+  display: none;
 }
 
 /* ── Áreas de Atendimento ── */
@@ -1199,6 +1143,139 @@ footer {
 .text-yellow { color: var(--yellow); }
 .bg-yellow { background-color: var(--yellow); }
 .border-yellow { border-color: var(--yellow); }
+
+/* ── Service number ── */
+.service-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  margin-bottom: 12px;
+  display: block;
+  opacity: 0.8;
+}
+
+/* ── Sobre: checklist premium ── */
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+}
+
+.check-item::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--yellow);
+  flex-shrink: 0;
+}
+
+/* ── CTA dark: texto claro ── */
+.cta-section .section-eyebrow { color: rgba(255,255,255,0.3); }
+
+/* ── Horizontal rule de seção ── */
+.section-rule {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  border: none;
+  margin: 0;
+}
+
+/* ── Equip list ── */
+.equip-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+.equip-list-item {
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.equip-list-item:nth-child(odd) {
+  padding-right: 32px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.equip-list-item:nth-child(even) {
+  padding-left: 32px;
+}
+
+.equip-list-item::before {
+  content: '—';
+  color: var(--yellow);
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+.equip-list-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.equip-list-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 3px;
+}
+
+@media (max-width: 640px) {
+  .equip-list { grid-template-columns: 1fr; }
+  .equip-list-item:nth-child(odd) { padding-right: 0; border-right: none; }
+  .equip-list-item:nth-child(even) { padding-left: 0; }
+}
+
+/* ── Testimonial premium ── */
+.testimonial-quote {
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.testimonial-author-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.testimonial-author-role {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+
+/* ── Stat accent dot ── */
+.stat-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--yellow);
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 2px;
+  vertical-align: super;
+}
+
+@media (max-width: 768px) {
+  .stat-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 28px 10px; }
+  .stat-card:last-child { border-bottom: none; }
+}
 
 /* ── Success message ── */
 .form-success {
