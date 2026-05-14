@@ -7,7 +7,7 @@ const items = [
   {
     n: '02',
     title: 'Compromisso com Prazo',
-    desc: '98% das obras entregues dentro do cronograma. Planejamento rigoroso e gestão de equipe eficiente.',
+    desc: 'Obras entregues dentro do cronograma com planejamento rigoroso e gestão de equipe eficiente.',
   },
   {
     n: '03',
