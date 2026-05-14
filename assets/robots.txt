@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bicudoterraplanagem.vercel.app/sitemap.xml
+Sitemap: https://www.bicudoterraplanagem.com.br/sitemap.xml
