@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy:      #0E2347;
+  --color-navy-800:  #0a1b38;
+  --color-navy-600:  #1a3a6b;
+  --color-gold:      #F4C430;
+  --color-gold-600:  #d4a820;
+  --color-gold-100:  #fef9e7;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #1a1a1a;
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ── Scroll animations ── */
+[data-anim] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1),
+              transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+[data-anim="left"]  { transform: translateX(-32px); }
+[data-anim="right"] { transform: translateX(32px); }
+[data-anim="up"]    { transform: translateY(32px); }
+[data-anim="scale"] { transform: scale(0.94) translateY(16px); }
+
+[data-anim].visible { opacity: 1; transform: none; }
+
+.delay-1 { transition-delay: 0.1s !important; }
+.delay-2 { transition-delay: 0.2s !important; }
+.delay-3 { transition-delay: 0.3s !important; }
+.delay-4 { transition-delay: 0.4s !important; }
+.delay-5 { transition-delay: 0.5s !important; }
