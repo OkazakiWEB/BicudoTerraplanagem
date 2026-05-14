@@ -5,7 +5,6 @@ import TrustBar from './components/TrustBar.jsx'
 import About from './components/About.jsx'
 import Services from './components/Services.jsx'
 import Differentials from './components/Differentials.jsx'
-import Testimonials from './components/Testimonials.jsx'
 import FAQ from './components/FAQ.jsx'
 import CTAFinal from './components/CTAFinal.jsx'
 import Footer from './components/Footer.jsx'
@@ -36,8 +35,7 @@ export default function App() {
         <About />
         <Services />
         <Differentials />
-        <Testimonials />
-        <FAQ />
+<FAQ />
         <CTAFinal />
       </main>
       <Footer />

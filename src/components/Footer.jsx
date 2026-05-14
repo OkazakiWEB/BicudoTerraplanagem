@@ -1,4 +1,4 @@
-import { WA, PHONE_DISPLAY, PHONE_RAW, EMAIL, INSTAGRAM } from '../constants.js'
+import { WA, PHONE_DISPLAY, PHONE_RAW, EMAIL, INSTAGRAM, CNPJ } from '../constants.js'
 
 
 const PhoneIcon = () => (
@@ -138,7 +138,7 @@ export default function Footer() {
             © {year} Bicudo Terraplanagem. Todos os direitos reservados.
           </p>
           <p className="text-white/15 text-xs" style={{ fontFamily: 'Inter, sans-serif' }}>
-            CNPJ: 00.000.000/0001-00
+            CNPJ: {CNPJ}
           </p>
         </div>
       </div>
