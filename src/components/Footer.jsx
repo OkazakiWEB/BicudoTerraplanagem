@@ -32,7 +32,7 @@ export default function Footer() {
     <footer className="bg-[#0E2347] pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-        <div className="grid md:grid-cols-3 gap-12 pb-12 border-b border-white/8">
+        <div className="grid md:grid-cols-3 gap-12 pb-12 border-b border-white/[8%]">
 
           <div>
             <div className="flex items-center gap-3 mb-5">
