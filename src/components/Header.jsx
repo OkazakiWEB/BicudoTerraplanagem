@@ -1,17 +1,6 @@
 import { useState, useEffect } from 'react'
 import { WA } from '../constants.js'
 
-const LogoIcon = () => (
-  <svg width="44" height="32" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8 28 L20 10 L30 14" stroke="#F4C430" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M27 12 L34 10 L36 17 L29 19 Z" stroke="#F4C430" strokeWidth="2.5" strokeLinejoin="round"/>
-    <path d="M6 30 C6 26 10 23 14 25 C18 27 20 32 24 32 C28 32 32 28 32 24 C32 20 28 17 24 19 C20 21 18 26 14 27"
-      stroke="#F4C430" strokeWidth="3" strokeLinecap="round" fill="none"/>
-    <ellipse cx="40" cy="32" rx="8" ry="4" stroke="#F4C430" strokeWidth="2.5" fill="none"/>
-    <line x1="32" y1="32" x2="48" y2="32" stroke="#F4C430" strokeWidth="2" opacity="0.5"/>
-  </svg>
-)
-
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -41,8 +30,8 @@ export default function Header() {
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
-          <div className="bg-[#0E2347] rounded-lg p-2 flex items-center justify-center">
-            <LogoIcon />
+          <div className="bg-[#0E2347] rounded-lg p-1.5 flex items-center justify-center">
+            <img src="/logo-mark.svg" alt="Bicudo Terraplanagem" width="46" height="28" className="block" />
           </div>
           <div className="flex flex-col leading-tight">
             <span
