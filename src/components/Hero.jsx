@@ -1,9 +1,9 @@
 const WA = 'https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.'
 
 const stats = [
-  { value: '+10', label: 'Anos de experiência' },
+  { value: '+10',  label: 'Anos de experiência' },
   { value: '+300', label: 'Obras realizadas' },
-  { value: 'SP', label: 'Atendimento São Paulo' },
+  { value: 'SP',   label: 'Atendimento São Paulo' },
   { value: '24/7', label: 'Suporte operacional' },
 ]
 
@@ -21,101 +21,124 @@ export default function Hero() {
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(110deg, rgba(14,35,71,0.96) 0%, rgba(14,35,71,0.78) 50%, rgba(14,35,71,0.35) 100%)',
+          background:
+            'linear-gradient(115deg, rgba(14,35,71,0.94) 0%, rgba(14,35,71,0.72) 55%, rgba(14,35,71,0.25) 100%)',
         }}
       />
 
-      {/* Decorative gold line */}
+      {/* Decorative gold left bar */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#F4C430]" />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-40 w-full">
-        <div className="max-w-3xl">
+      {/* Main content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-16 pt-28 pb-44 w-full">
+        <div className="max-w-2xl">
 
           {/* Eyebrow */}
-          <div
-            className="flex items-center gap-3 mb-6"
-            data-anim="up"
-          >
-            <div className="w-8 h-px bg-[#F4C430]" />
+          <div className="flex items-center gap-3 mb-8" data-anim="up">
+            <div className="w-6 h-px bg-[#F4C430]" />
             <span
-              className="text-[#F4C430] text-xs font-bold tracking-[4px] uppercase"
+              className="text-[#F4C430] text-[11px] font-bold tracking-[5px] uppercase"
               style={{ fontFamily: 'Outfit, sans-serif' }}
             >
-              São Paulo · Desde 2005
+              São Paulo &bull; Desde 2005
             </span>
           </div>
 
-          {/* Headline */}
+          {/* Headline — two clean lines, controlled size */}
           <h1
-            className="text-white leading-[0.85] mb-8"
+            className="text-white mb-7"
             style={{
               fontFamily: 'Outfit, sans-serif',
               fontWeight: 900,
-              fontSize: 'clamp(64px, 12vw, 128px)',
-              letterSpacing: '-3px',
+              fontSize: 'clamp(40px, 5.5vw, 72px)',
+              letterSpacing: '-1.5px',
+              lineHeight: 1.05,
             }}
             data-anim="up"
           >
-            TERRA<br />
-            <span className="text-[#F4C430]">PLANE</span><br />
-            AGEM
+            SOLUÇÕES EM<br />
+            <span style={{ color: '#F4C430' }}>TERRAPLANAGEM</span>
           </h1>
+
+          {/* Separator line */}
+          <div className="flex items-center gap-4 mb-7" data-anim="up">
+            <div className="w-10 h-px bg-[#F4C430]/60" />
+            <div className="h-px flex-1 max-w-[160px] bg-white/10" />
+          </div>
 
           {/* Subheadline */}
           <p
-            className="text-white/65 text-lg lg:text-xl leading-relaxed mb-10 max-w-xl"
-            style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300 }}
+            className="text-white/60 mb-10 leading-[1.75]"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: 300,
+              fontSize: 'clamp(15px, 1.2vw, 18px)',
+              maxWidth: '420px',
+            }}
             data-anim="up"
           >
-            Terraplanagem de alta performance para obras industriais, residenciais e de infraestrutura.
-            Equipamentos modernos, equipe especializada, entrega no prazo.
+            Equipamentos modernos e equipe especializada
+            para obras industriais, residenciais e de infraestrutura
+            em São Paulo.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4" data-anim="up">
+          <div className="flex flex-col sm:flex-row gap-3" data-anim="up">
             <a
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-[#F4C430] text-[#0E2347] font-black uppercase text-sm tracking-widest px-8 py-4 rounded-full transition-all duration-200 hover:bg-[#d4a820] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(244,196,48,0.4)]"
+              className="inline-flex items-center justify-center gap-2 bg-[#F4C430] text-[#0E2347] font-black uppercase text-xs tracking-[2px] px-7 py-3.5 rounded-full transition-all duration-200 hover:bg-[#d4a820] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(244,196,48,0.35)]"
               style={{ fontFamily: 'Outfit, sans-serif' }}
             >
               Solicitar Orçamento
             </a>
             <a
               href="#servicos"
-              className="inline-flex items-center justify-center gap-2 bg-transparent text-white font-bold uppercase text-sm tracking-widest px-8 py-4 rounded-full border-2 border-white/30 transition-all duration-200 hover:border-white/70 hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 bg-transparent text-white/75 font-semibold uppercase text-xs tracking-[2px] px-7 py-3.5 rounded-full border border-white/20 transition-all duration-200 hover:border-white/50 hover:text-white hover:bg-white/5"
               style={{ fontFamily: 'Outfit, sans-serif' }}
             >
-              Conheça Nossos Serviços
+              Ver Serviços
             </a>
           </div>
         </div>
       </div>
 
-      {/* Stat cards */}
+      {/* Stats bar — anchored to bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-8 lg:px-16">
+          <div
+            className="grid grid-cols-2 lg:grid-cols-4"
+            style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+          >
             {stats.map((s, i) => (
               <div
                 key={i}
-                className="px-6 py-6 lg:py-8 border-r border-white/10 last:border-r-0"
+                className="px-6 py-5 lg:py-7"
                 style={{
-                  background: 'rgba(14,35,71,0.75)',
-                  backdropFilter: 'blur(20px)',
-                  borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                  background: 'rgba(14,35,71,0.70)',
+                  backdropFilter: 'blur(16px)',
+                  borderRight: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                  borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
                 }}
                 data-anim="up"
               >
                 <div
                   className="text-[#F4C430] mb-1"
-                  style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 900, fontSize: 'clamp(24px,3vw,40px)', letterSpacing: '-1px' }}
+                  style={{
+                    fontFamily: 'Outfit, sans-serif',
+                    fontWeight: 900,
+                    fontSize: 'clamp(22px, 2.5vw, 32px)',
+                    letterSpacing: '-0.5px',
+                    lineHeight: 1,
+                  }}
                 >
                   {s.value}
                 </div>
-                <div className="text-white/50 text-xs uppercase tracking-widest" style={{ fontFamily: 'Outfit, sans-serif' }}>
+                <div
+                  className="text-white/40 uppercase tracking-widest"
+                  style={{ fontFamily: 'Outfit, sans-serif', fontSize: '10px', fontWeight: 600 }}
+                >
                   {s.label}
                 </div>
               </div>
