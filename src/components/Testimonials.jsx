@@ -99,15 +99,12 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Grid — 3 cols top, 2 cols bottom centered */}
-        <div className="grid md:grid-cols-3 gap-5 mb-5">
-          {testimonials.slice(0, 3).map((t, i) => (
-            <Card key={i} t={t} i={i} />
-          ))}
-        </div>
-        <div className="grid md:grid-cols-2 gap-5 md:max-w-2xl mx-auto">
-          {testimonials.slice(3).map((t, i) => (
-            <Card key={i + 3} t={t} i={i + 3} />
+        {/* Horizontal scroll */}
+        <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 lg:-mx-12 lg:px-12">
+          {testimonials.map((t, i) => (
+            <div key={i} className="snap-start flex-shrink-0 w-[80vw] sm:w-[360px]">
+              <Card t={t} i={i} />
+            </div>
           ))}
         </div>
 
