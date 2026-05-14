@@ -1,4 +1,4 @@
-const WA = 'https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.'
+import { WA } from '../constants.js'
 
 const stats = [
   { value: '+10',  label: 'Anos de experiência' },

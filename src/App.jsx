@@ -1,11 +1,15 @@
 import { useEffect } from 'react'
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
+import TrustBar from './components/TrustBar.jsx'
 import About from './components/About.jsx'
 import Services from './components/Services.jsx'
 import Differentials from './components/Differentials.jsx'
+import Testimonials from './components/Testimonials.jsx'
+import FAQ from './components/FAQ.jsx'
 import CTAFinal from './components/CTAFinal.jsx'
 import Footer from './components/Footer.jsx'
+import WhatsAppFloat from './components/WhatsAppFloat.jsx'
 
 export default function App() {
   useEffect(() => {
@@ -28,12 +32,16 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <TrustBar />
         <About />
         <Services />
         <Differentials />
+        <Testimonials />
+        <FAQ />
         <CTAFinal />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </>
   )
 }

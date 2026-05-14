@@ -1,11 +1,23 @@
+const TruckIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#F4C430]">
+    <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+  </svg>
+)
+
+const HardHatIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#F4C430]">
+    <path d="M12 3C8.46 3 5.5 5.6 5.07 9H3v2h.06C3.56 13.24 5.5 15 8 15h8c2.5 0 4.44-1.76 4.94-4H21V9h-2.07C18.5 5.6 15.54 3 12 3zm0 2c2.65 0 4.86 1.82 5.46 4.3A6.02 6.02 0 0 1 12 11a6 6 0 0 1-5.46-1.7C7.14 6.82 9.35 5 12 5zM3 17v2h18v-2H3z"/>
+  </svg>
+)
+
 const highlights = [
   {
-    icon: '🚜',
+    Icon: TruckIcon,
     title: 'Equipamentos Modernos',
     desc: 'Frota própria com escavadeiras, motoniveladoras e caminhões de última geração.',
   },
   {
-    icon: '👷',
+    Icon: HardHatIcon,
     title: 'Equipe Especializada',
     desc: 'Profissionais certificados com décadas de experiência em obras de grande porte.',
   },
@@ -29,6 +41,9 @@ export default function About() {
                 src="/img-02.jpg"
                 alt="Equipe Bicudo em obra"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                width="600"
+                height="750"
               />
               {/* Year badge */}
               <div className="absolute bottom-6 left-6 bg-[#0E2347] text-white rounded-xl px-5 py-4">
@@ -90,7 +105,7 @@ export default function About() {
                   key={i}
                   className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-[#F4C430] hover:shadow-md transition-all duration-300 group"
                 >
-                  <div className="text-3xl mb-3">{h.icon}</div>
+                  <div className="mb-3"><h.Icon /></div>
                   <div
                     className="text-[#0E2347] font-bold mb-2 text-sm uppercase tracking-wide"
                     style={{ fontFamily: 'Outfit, sans-serif' }}

@@ -1,4 +1,4 @@
-const WA = 'https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.'
+import { WA, PHONE_DISPLAY, PHONE_RAW } from '../constants.js'
 
 export default function CTAFinal() {
   return (
@@ -31,7 +31,7 @@ export default function CTAFinal() {
           style={{
             fontFamily: 'Outfit, sans-serif',
             fontWeight: 900,
-            fontSize: 'clamp(36px, 6vw, 76px)',
+            fontSize: 'clamp(32px, 4.5vw, 58px)',
             letterSpacing: '-2px',
             lineHeight: 1.0,
           }}
@@ -66,8 +66,8 @@ export default function CTAFinal() {
 
           <div className="text-[#0E2347]/50 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
             ou ligue para{' '}
-            <a href="tel:+5511999999999" className="font-bold text-[#0E2347] hover:underline">
-              (11) 99999-9999
+            <a href={`tel:+${PHONE_RAW}`} className="font-bold text-[#0E2347] hover:underline">
+              {PHONE_DISPLAY}
             </a>
           </div>
         </div>
